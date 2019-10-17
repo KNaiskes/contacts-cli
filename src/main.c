@@ -2,10 +2,11 @@
 
 #include "database.h"
 
-
 int main(void)
 {
-    CreateDatabase("testDB.db");
+    const char *dbName = "contacts.db";
+
+    CreateDatabase(dbName);
 
     return 0;
 }

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <sqlite3.h>
 
+#include "contact.h"
+
 static sqlite3 *db;
 static int *zErrMsg = 0;
 static int rc;
@@ -26,7 +28,7 @@ void CreateDatabase(const char *dbName)
            "PHONENUMER1 CHAR(20),"                          \
            "PHONENUMER2 CHAR(20),"                          \
            "EMAIL CHAR(30),"                                \
-           "address CHAR(30)"                               \
+           "ADDRESS CHAR(30)"                               \
            ");"                                             \
            ;
 
@@ -37,6 +39,38 @@ void CreateDatabase(const char *dbName)
         sqlite3_free(zErrMsg);
     } else {
         fprintf(stdout, "Database was successfully created\n");
+    }
+
+    sqlite3_close(db);
+}
+
+void InsertContact(const char *dbName, const struct Contact* contact)
+{
+    char *sql = sqlite3_mprintf(
+            "INSERT INTO contacts"                                       \
+            "(NAME, LASTNAME, PHONENUMER1, PHONENUMER2, EMAIL, ADDRESS)" \
+            "VALUES('%q','%q','%q','%q','%q','%q');",                    \
+            contact->Name, contact->LastName, contact->PhoneNumber1,
+            contact->PhoneNumber2, contact->Email, contact->Address
+    );
+
+    rc = sqlite3_open(dbName, &db);
+
+    if(rc) {
+        fprintf(stderr, "Error whiling inserting new contact %s\n",
+                sqlite3_errmsg(db));
+    }
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if(rc != SQLITE_OK) {
+        fprintf(stderr, "Someting went wrong: %s\n", zErrMsg);
+
+        sqlite3_free(zErrMsg);
+    }
+    else {
+        fprintf(stdout, "Contact %s %s was added\n",
+                contact->Name, contact->LastName);
     }
 
     sqlite3_close(db);

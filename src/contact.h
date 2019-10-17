@@ -6,8 +6,8 @@ struct Contact {
     char LastName[20];
     char PhoneNumber1[20];
     char PhoneNumber2[20];
-    char email[30];
-    char address[30];
+    char Email[30];
+    char Address[30];
 };
 
 #endif // CONTACT_H_

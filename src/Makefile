@@ -1,3 +1,5 @@
+CC = gcc
+
 main: main.o database.o
 	$(CC) main.o database.o -l sqlite3 -o contacts-cli
 

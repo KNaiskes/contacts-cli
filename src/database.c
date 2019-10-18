@@ -52,12 +52,12 @@ void InsertContact(const char *dbName, const struct Contact* contact)
             "VALUES('%q','%q','%q','%q','%q','%q');",                    \
             contact->Name, contact->LastName, contact->PhoneNumber1,
             contact->PhoneNumber2, contact->Email, contact->Address
-    );
+            );
 
     rc = sqlite3_open(dbName, &db);
 
     if(rc) {
-        fprintf(stderr, "Error whiling inserting new contact %s\n",
+        fprintf(stderr, "Error while inserting new contact %s\n",
                 sqlite3_errmsg(db));
     }
 
@@ -71,6 +71,32 @@ void InsertContact(const char *dbName, const struct Contact* contact)
     else {
         fprintf(stdout, "Contact %s %s was added\n",
                 contact->Name, contact->LastName);
+    }
+
+    sqlite3_close(db);
+}
+
+void DeleteContact(const char* dbName, const struct Contact* contact)
+{
+    char *sql = sqlite3_mprintf(
+            "DELETE FROM contacts WHERE lastname = ('%q');", contact->LastName);
+
+    rc = sqlite3_open(dbName, &db);
+
+    if(rc) {
+        fprintf(stderr, "Error while deleting a contact %s\n",
+                sqlite3_errmsg(db));
+    }
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if(rc != SQLITE_OK) {
+        fprintf(stderr, "Something went wrong %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    }
+    else {
+        fprintf(stdout, "Contact with lastname %s was deleted\n",
+                contact->LastName);
     }
 
     sqlite3_close(db);

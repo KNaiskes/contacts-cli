@@ -8,7 +8,7 @@ int main(void)
 {
     const char *dbName = "contacts.db";
 
-    struct Contact *contactTest = {
+    struct Contact testContact = {
         "kiriakos",
         "naiskes",
         "3949393",
@@ -16,6 +16,9 @@ int main(void)
         "xxxxxxxxxxxxxxx@gmail.com",
         "xxxxxkkkk fkfkfkkf"
     };
+
+
+    struct Contact *contactTest = &testContact;
 
     CreateDatabase(dbName);
     InsertContact(dbName, contactTest);

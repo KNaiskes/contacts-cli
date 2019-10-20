@@ -21,7 +21,7 @@ int main(void)
     struct Contact *contactTest = &testContact;
 
     CreateDatabase(dbName);
-    //InsertContact(dbName, contactTest);
+    InsertContact(dbName, contactTest);
     DeleteContact(dbName, contactTest);
 
 

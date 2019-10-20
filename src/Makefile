@@ -10,4 +10,4 @@ database.o: database.c
 	$(CC) -c database.c
 
 clean:
-	rm *.o contacts-cli
+	rm *.o contacts-cli contacts.db

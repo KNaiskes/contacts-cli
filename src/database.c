@@ -16,6 +16,16 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName)
     return 0;
 }
 
+void checkSQLiteOK(int rc, int zErrMsg, char *successMsg, char *failMsg)
+{
+    if(rc != SQLITE_OK) {
+        fprintf(stderr, "%s\n", failMsg, zErrMsg);
+    }
+    else {
+        fprintf(stdout, "%s\n", successMsg);
+    }
+}
+
 void CreateDatabase(const char *dbName)
 {
     char* sql;
@@ -34,12 +44,8 @@ void CreateDatabase(const char *dbName)
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
-    if(rc != SQLITE_OK) {
-        fprintf(stderr, "Something went wrong: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
-    } else {
-        fprintf(stdout, "Database was successfully created\n");
-    }
+    checkSQLiteOK(rc, zErrMsg, "Database was successfully created",
+            "Could not create database");
 
     sqlite3_close(db);
 }
@@ -63,15 +69,7 @@ void InsertContact(const char *dbName, const struct Contact* contact)
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
-    if(rc != SQLITE_OK) {
-        fprintf(stderr, "Someting went wrong: %s\n", zErrMsg);
-
-        sqlite3_free(zErrMsg);
-    }
-    else {
-        fprintf(stdout, "Contact %s %s was added\n",
-                contact->Name, contact->LastName);
-    }
+    checkSQLiteOK(rc, zErrMsg, "Contact was added", "Something went wrong");
 
     sqlite3_close(db);
 }
@@ -90,14 +88,8 @@ void DeleteContact(const char* dbName, const struct Contact* contact)
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
-    if(rc != SQLITE_OK) {
-        fprintf(stderr, "Something went wrong %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
-    }
-    else {
-        fprintf(stdout, "Contact with lastname %s was deleted\n",
-                contact->LastName);
-    }
+    checkSQLiteOK(rc, zErrMsg, "Contact was successfully deleted",
+            "Could not delete contact");
 
     sqlite3_close(db);
 }

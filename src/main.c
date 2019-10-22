@@ -8,6 +8,12 @@ int main(void)
 {
     const char *dbName = "contacts.db";
 
+    char userOption;
+
+    struct Contact userInputContact;
+    struct Contact *contact = &userInputContact;
+
+    /*
     struct Contact testContact = {
         "kiriakos",
         "naiskes",
@@ -17,13 +23,37 @@ int main(void)
         "xxxxxkkkk fkfkfkkf"
     };
 
-
-    struct Contact *contactTest = &testContact;
-
     CreateDatabase(dbName);
     InsertContact(dbName, contactTest);
     DeleteContact(dbName, contactTest);
+    */
 
+
+    printf("**** Welcome to contacts-cli ****\n");
+
+    printf("Enter: \n"                              \
+            "a to insert a new contact\n"           \
+            "v to view all your contacts\n"         \
+            "s to search for a contact\n"           \
+            "d to delete a contact\n"               \
+            "> "                                    \
+          );
+
+    userOption = getchar();
+
+    switch(userOption) {
+        case 'A': case 'a':
+            // add contact
+            break;
+        case 'v': case 'V':
+            // view all contacts
+            break;
+        case 'd': case 'D':
+            // delete contact
+            break;
+        default:
+            printf("Invalid option\n");
+    }
 
     return 0;
 }

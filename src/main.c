@@ -40,10 +40,11 @@ int main(void)
           );
 
     userOption = getchar();
+    //TODO clear the input buffer!
 
     switch(userOption) {
         case 'A': case 'a':
-            // add contact
+            addNewContact();
             break;
         case 'v': case 'V':
             // view all contacts

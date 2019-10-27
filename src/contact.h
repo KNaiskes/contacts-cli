@@ -10,4 +10,6 @@ struct Contact {
     char Address[30];
 };
 
+void addNewContact();
+
 #endif // CONTACT_H_

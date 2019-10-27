@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "database.h"
 #include "contact.h"
@@ -7,6 +8,10 @@
 int main(void)
 {
     const char *dbName = "contacts.db";
+
+    if(access(dbName, F_OK) == -1) {
+        CreateDatabase(dbName);
+    }
 
     char userOption;
 

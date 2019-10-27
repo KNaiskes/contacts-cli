@@ -28,7 +28,6 @@ int main(void)
     DeleteContact(dbName, contactTest);
     */
 
-
     printf("**** Welcome to contacts-cli ****\n");
 
     printf("Enter: \n"                              \
@@ -40,7 +39,7 @@ int main(void)
           );
 
     userOption = getchar();
-    //TODO clear the input buffer!
+    while((getchar()) != '\n'); // clean STDIN buffer
 
     switch(userOption) {
         case 'A': case 'a':

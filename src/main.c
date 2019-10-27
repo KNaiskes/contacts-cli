@@ -10,24 +10,6 @@ int main(void)
 
     char userOption;
 
-    struct Contact userInputContact;
-    struct Contact *contact = &userInputContact;
-
-    /*
-    struct Contact testContact = {
-        "kiriakos",
-        "naiskes",
-        "3949393",
-        "3030400",
-        "xxxxxxxxxxxxxxx@gmail.com",
-        "xxxxxkkkk fkfkfkkf"
-    };
-
-    CreateDatabase(dbName);
-    InsertContact(dbName, contactTest);
-    DeleteContact(dbName, contactTest);
-    */
-
     printf("**** Welcome to contacts-cli ****\n");
 
     printf("Enter: \n"                              \

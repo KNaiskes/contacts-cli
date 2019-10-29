@@ -20,6 +20,7 @@ int main(void)
     printf("Enter: \n"                              \
             "a to insert a new contact\n"           \
             "v to view all your contacts\n"         \
+            "e to edit a contact\n"                 \
             "s to search for a contact\n"           \
             "d to delete a contact\n"               \
             "> "                                    \
@@ -35,6 +36,8 @@ int main(void)
         case 'v': case 'V':
             // view all contacts
             break;
+        case 'e': case 'E':
+            // edit contact
         case 'd': case 'D':
             // delete contact
             break;

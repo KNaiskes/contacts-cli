@@ -79,7 +79,8 @@ void InsertContact(const struct Contact* contact)
 void DeleteContact(const struct Contact* contact)
 {
     char *sql = sqlite3_mprintf(
-            "DELETE FROM contacts WHERE lastname = ('%q');", contact->LastName);
+            "DELETE FROM contacts WHERE name = ('%q') AND lastname = ('%q');",
+                contact->Name, contact->LastName);
 
     rc = sqlite3_open(dbName, &db);
 

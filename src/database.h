@@ -3,9 +3,11 @@
 
 #include "contact.h"
 
+extern char *dbName;
+
 void CreateDatabase(const char* dbName);
-void InsertContact(const char* dbName, const struct Contact* contact);
-void DeleteContact(const char* dbName, const struct Contact* contact);
-void EditContact(const char* dbName, struct Contact* contact);
+void InsertContact(const struct Contact* contact);
+void DeleteContact(const struct Contact* contact);
+void EditContact(struct Contact* contact);
 
 #endif // DATABASE_H_

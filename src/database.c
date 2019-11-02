@@ -7,6 +7,8 @@ static sqlite3 *db;
 static int *zErrMsg = 0;
 static int rc;
 
+char *dbName = "contacts.db";
+
 static int callback(void *NotUsed, int argc, char **argv, char **azColName)
 {
     for(int i = 0; i < argc; i++) {
@@ -50,7 +52,7 @@ void CreateDatabase(const char *dbName)
     sqlite3_close(db);
 }
 
-void InsertContact(const char *dbName, const struct Contact* contact)
+void InsertContact(const struct Contact* contact)
 {
     char *sql = sqlite3_mprintf(
             "INSERT INTO contacts"                                       \
@@ -74,7 +76,7 @@ void InsertContact(const char *dbName, const struct Contact* contact)
     sqlite3_close(db);
 }
 
-void DeleteContact(const char* dbName, const struct Contact* contact)
+void DeleteContact(const struct Contact* contact)
 {
     char *sql = sqlite3_mprintf(
             "DELETE FROM contacts WHERE lastname = ('%q');", contact->LastName);

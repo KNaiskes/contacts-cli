@@ -22,5 +22,5 @@ void addNewContact()
     printf("Street address: ");
     fgets(newConctact.Address, sizeof(newConctact.Address), stdin);
 
-    InsertContact("contacts.db", &newConctact);
+    InsertContact(&newConctact);
 }

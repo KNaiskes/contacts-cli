@@ -38,7 +38,7 @@ int main(void)
         case 'e': case 'E':
             // edit contact
         case 'd': case 'D':
-            // delete contact
+            removeContact();
             break;
         default:
             printf("Invalid option\n");

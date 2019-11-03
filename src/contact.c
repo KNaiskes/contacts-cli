@@ -24,3 +24,19 @@ void addNewContact()
 
     InsertContact(&newConctact);
 }
+
+void removeContact()
+{
+    struct Contact deleteContact;
+
+    printf("\n**** Delete a contact ****\n");
+    printf("---------------------------\n");
+    printf("Name: ");
+    fgets(deleteContact.Name, sizeof(deleteContact.Name), stdin);
+    printf("Lastname: ");
+    fgets(deleteContact.LastName, sizeof(deleteContact.LastName), stdin);
+
+    // TODO: check if contact exists
+
+    DeleteContact(&deleteContact);
+}

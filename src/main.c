@@ -37,6 +37,7 @@ int main(void)
             break;
         case 'e': case 'E':
             // edit contact
+            break;
         case 'd': case 'D':
             removeContact();
             break;

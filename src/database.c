@@ -96,3 +96,33 @@ void DeleteContact(const struct Contact* contact)
 
     sqlite3_close(db);
 }
+
+int contactExists(const struct Contact* contact)
+{
+    int exists = 0;
+    char *sql = sqlite3_mprintf(
+            "SELECT id FROM contacts WHERE name = ('%q') AND lastname = ('%q');",
+            contact->Name, contact->LastName);
+
+
+    sqlite3_stmt *res;
+    rc = sqlite3_open(dbName, &db);
+
+    if(rc != SQLITE_OK) {
+        fprintf(stderr, "Error while checking if contact exists\n");
+        sqlite3_close(db);
+    }
+
+    rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+
+    int step = sqlite3_step(res);
+
+    if(step == SQLITE_ROW) {
+        exists = 1;
+    }
+
+    sqlite3_finalize(res);
+    sqlite3_close(db);
+
+    return exists;
+}

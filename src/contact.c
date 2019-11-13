@@ -36,7 +36,9 @@ void removeContact()
     printf("Lastname: ");
     fgets(deleteContact.LastName, sizeof(deleteContact.LastName), stdin);
 
-    // TODO: check if contact exists
-
-    DeleteContact(&deleteContact);
+    if(contactExists(&deleteContact)) {
+        DeleteContact(&deleteContact);
+    } else {
+        printf("Contact does not exist\n");
+    }
 }

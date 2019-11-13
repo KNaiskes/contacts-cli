@@ -39,7 +39,7 @@ int main(void)
                 addNewContact();
                 break;
             case 'v': case 'V':
-                // view all contacts
+                listAllContacts();
                 break;
             case 'e': case 'E':
                 // edit contact

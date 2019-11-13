@@ -80,7 +80,7 @@ void DeleteContact(const struct Contact* contact)
 {
     char *sql = sqlite3_mprintf(
             "DELETE FROM contacts WHERE name = ('%q') AND lastname = ('%q');",
-                contact->Name, contact->LastName);
+            contact->Name, contact->LastName);
 
     rc = sqlite3_open(dbName, &db);
 
@@ -125,4 +125,21 @@ int contactExists(const struct Contact* contact)
     sqlite3_close(db);
 
     return exists;
+}
+
+void listAllContacts()
+{
+    char *sql = "SELECT * FROM contacts";
+    char *err_msg = 0;
+
+    rc = sqlite3_open(dbName, &db);
+
+    if(rc) {
+        fprintf(stderr, "Error while trying to fetch all contacts %s\n",
+                sqlite3_errmsg(db));
+    }
+
+    rc = sqlite3_exec(db, sql, callback, 0, &err_msg);
+
+    sqlite3_close(db);
 }

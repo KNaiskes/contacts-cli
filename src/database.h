@@ -10,5 +10,6 @@ void InsertContact(const struct Contact* contact);
 void DeleteContact(const struct Contact* contact);
 void EditContact(struct Contact* contact);
 int contactExists(struct Contact* contact);
+void listAllContacts();
 
 #endif // DATABASE_H_

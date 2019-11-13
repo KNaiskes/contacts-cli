@@ -12,37 +12,44 @@ int main(void)
         CreateDatabase(dbName);
     }
 
-    char userOption;
+    while(1) {
+        char userOption;
 
-    printf("**** Welcome to contacts-cli ****\n");
+        printf("**** Welcome to contacts-cli ****\n");
 
-    printf("Enter: \n"                              \
-            "a to insert a new contact\n"           \
-            "v to view all your contacts\n"         \
-            "e to edit a contact\n"                 \
-            "s to search for a contact\n"           \
-            "d to delete a contact\n"               \
-            "> "                                    \
-          );
+        printf("Enter: \n"                              \
+                "a to insert a new contact\n"           \
+                "v to view all your contacts\n"         \
+                "e to edit a contact\n"                 \
+                "s to search for a contact\n"           \
+                "d to delete a contact\n"               \
+                "q to quit\n"                           \
+                "> "                                    \
+              );
 
-    userOption = getchar();
-    while((getchar()) != '\n'); // clean STDIN buffer
+        userOption = getchar();
+        if(userOption == 'Q' || userOption == 'q') {
+            break; // Exit program
+        }
 
-    switch(userOption) {
-        case 'A': case 'a':
-            addNewContact();
-            break;
-        case 'v': case 'V':
-            // view all contacts
-            break;
-        case 'e': case 'E':
-            // edit contact
-            break;
-        case 'd': case 'D':
-            removeContact();
-            break;
-        default:
-            printf("Invalid option\n");
+        while((getchar()) != '\n'); // clean STDIN buffer
+
+        switch(userOption) {
+            case 'A': case 'a':
+                addNewContact();
+                break;
+            case 'v': case 'V':
+                // view all contacts
+                break;
+            case 'e': case 'E':
+                // edit contact
+                break;
+            case 'd': case 'D':
+                removeContact();
+                break;
+            default:
+                printf("Invalid option\n");
+        }
     }
 
     return 0;

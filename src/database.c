@@ -37,8 +37,8 @@ void CreateDatabase(const char *dbName)
            "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," \
            "NAME CHAR(20) NOT NULL,"                        \
            "LASTNAME CHAR(20) NOT NULL,"                    \
-           "PHONENUMER1 CHAR(20),"                          \
-           "PHONENUMER2 CHAR(20),"                          \
+           "PHONENUMBER1 CHAR(20),"                          \
+           "PHONENUMBER2 CHAR(20),"                          \
            "EMAIL CHAR(30),"                                \
            "ADDRESS CHAR(30)"                               \
            ");"                                             \
@@ -56,7 +56,7 @@ void InsertContact(const struct Contact* contact)
 {
     char *sql = sqlite3_mprintf(
             "INSERT INTO contacts"                                       \
-            "(NAME, LASTNAME, PHONENUMER1, PHONENUMER2, EMAIL, ADDRESS)" \
+            "(NAME, LASTNAME, PHONENUMBER1, PHONENUMBER2, EMAIL, ADDRESS)" \
             "VALUES('%q','%q','%q','%q','%q','%q');",                    \
             contact->Name, contact->LastName, contact->PhoneNumber1,
             contact->PhoneNumber2, contact->Email, contact->Address
@@ -149,8 +149,8 @@ void updateContact(struct Contact* contact, char *name, char *lastname)
             "UPDATE contacts SET                        " \
             "NAME = ('%q'),                             " \
             "LASTNAME = ('%q'),                         " \
-            "PHONENUMER1 = ('%q'),                      " \
-            "PHONENUMER2 = ('%q'),                      " \
+            "PHONENUMBER1 = ('%q'),                     " \
+            "PHONENUMBER2 = ('%q'),                     " \
             "EMAIL = ('%q'),                            " \
             "ADDRESS = ('%q')                           " \
             "WHERE NAME = ('%q') AND LASTNAME = ('%q')  " \

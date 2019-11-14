@@ -42,6 +42,7 @@ int main(void)
                 listAllContacts();
                 break;
             case 'e': case 'E':
+                editContact();
                 // edit contact
                 break;
             case 'd': case 'D':

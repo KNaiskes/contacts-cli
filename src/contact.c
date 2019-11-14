@@ -50,3 +50,23 @@ void removeContact()
         printf("Contact does not exist\n");
     }
 }
+
+void editContact()
+{
+    struct Contact updateContactStruct;
+
+    printf("\n**** Update contact  ****\n");
+    printf("---------------------------\n");
+    printf("Name: ");
+    fgets(updateContactStruct.Name, sizeof(updateContactStruct.Name), stdin);
+    printf("Lastname: ");
+    fgets(updateContactStruct.LastName, sizeof(updateContactStruct.LastName), stdin);
+
+    if(contactExists(&updateContactStruct)) {
+        // TODO get the updated values
+        //updateContact(&updateContactStruct);
+    } else {
+        printf("Contact does not exist\n");
+    }
+
+}

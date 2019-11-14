@@ -11,5 +11,6 @@ void DeleteContact(const struct Contact* contact);
 void EditContact(struct Contact* contact);
 int contactExists(struct Contact* contact);
 void listAllContacts();
+void updateContact(struct Contact* contact, char *name, char *lastname);
 
 #endif // DATABASE_H_

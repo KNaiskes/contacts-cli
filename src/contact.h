@@ -12,5 +12,6 @@ struct Contact {
 
 void addNewContact();
 void removeContact();
+void editContact();
 
 #endif // CONTACT_H_

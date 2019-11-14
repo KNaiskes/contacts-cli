@@ -143,3 +143,28 @@ void listAllContacts()
 
     sqlite3_close(db);
 }
+
+void updateContact(struct Contact* contact)
+{
+    char *sql = sqlite3_mprintf(
+            "UPDATE contacts SET                " \
+            "NAME = ('%q'),                     " \
+            "LASTNAME = ('%q'),                 " \
+            "PHONENUMER1 = ('%q'),              " \
+            "PHONENUMER2 = ('%q'),              " \
+            "EMAIL = ('%q'),                    " \
+            "ADDRESS = ('%q')                   " \
+            ,
+            contact->Name, contact->LastName, contact->PhoneNumber1,
+            contact->PhoneNumber2, contact->Email, contact->Address
+            );
+
+    rc = sqlite3_open(dbName, &db);
+
+    if(rc) {
+        fprintf(stderr, "Error while trying to update contact %s\n",
+                sqlite3_errmsg(db));
+    }
+
+    sqlite3_close(db);
+}

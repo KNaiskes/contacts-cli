@@ -97,13 +97,12 @@ void DeleteContact(const struct Contact* contact)
     sqlite3_close(db);
 }
 
-int contactExists(const struct Contact* contact)
+int contactExists(char *name, char *lastName)
 {
     int exists = 0;
     char *sql = sqlite3_mprintf(
             "SELECT id FROM contacts WHERE name = ('%q') AND lastname = ('%q');",
-            contact->Name, contact->LastName);
-
+            name, lastName);
 
     sqlite3_stmt *res;
     rc = sqlite3_open(dbName, &db);
@@ -144,19 +143,21 @@ void listAllContacts()
     sqlite3_close(db);
 }
 
-void updateContact(struct Contact* contact)
+void updateContact(struct Contact* contact, char *name, char *lastname)
 {
     char *sql = sqlite3_mprintf(
-            "UPDATE contacts SET                " \
-            "NAME = ('%q'),                     " \
-            "LASTNAME = ('%q'),                 " \
-            "PHONENUMER1 = ('%q'),              " \
-            "PHONENUMER2 = ('%q'),              " \
-            "EMAIL = ('%q'),                    " \
-            "ADDRESS = ('%q')                   " \
+            "UPDATE contacts SET                        " \
+            "NAME = ('%q'),                             " \
+            "LASTNAME = ('%q'),                         " \
+            "PHONENUMER1 = ('%q'),                      " \
+            "PHONENUMER2 = ('%q'),                      " \
+            "EMAIL = ('%q'),                            " \
+            "ADDRESS = ('%q')                           " \
+            "WHERE NAME = ('%q') AND LASTNAME = ('%q')  " \
             ,
             contact->Name, contact->LastName, contact->PhoneNumber1,
-            contact->PhoneNumber2, contact->Email, contact->Address
+            contact->PhoneNumber2, contact->Email, contact->Address,
+            name, lastname
             );
 
     rc = sqlite3_open(dbName, &db);

@@ -14,7 +14,7 @@ void addNewContact()
     printf("Lastname: ");
     fgets(newConctact.LastName, sizeof(newConctact.LastName), stdin);
 
-    if(contactExists(&newConctact)) {
+    if(contactExists(newConctact.Name, newConctact.LastName)) {
         printf("Contact already exists\n");
         // TODO: return back to menu
     }
@@ -44,9 +44,46 @@ void removeContact()
     printf("Lastname: ");
     fgets(deleteContact.LastName, sizeof(deleteContact.LastName), stdin);
 
-    if(contactExists(&deleteContact)) {
+    if(contactExists(deleteContact.Name, deleteContact.LastName)) {
         DeleteContact(&deleteContact);
     } else {
         printf("Contact does not exist\n");
     }
+}
+
+void editContact()
+{
+    struct Contact updateContactStruct;
+
+    char name[20];
+    char lastname[20];
+    // TODO: malloc memory in runtime rather than using a fixed value
+
+    printf("\n**** Update contact  ****\n");
+    printf("---------------------------\n");
+    printf("Name: ");
+    fgets(name, sizeof(name), stdin);
+    printf("Lastname: ");
+    fgets(lastname, sizeof(lastname), stdin);
+
+    if(contactExists(name, lastname)) {
+        printf("Update name: ");
+        fgets(updateContactStruct.Name, sizeof(updateContactStruct.Name), stdin);
+        printf("Update lastname: ");
+        fgets(updateContactStruct.LastName, sizeof(updateContactStruct.LastName), stdin);
+        printf("Update phone number: ");
+        fgets(updateContactStruct.PhoneNumber1, sizeof(updateContactStruct.PhoneNumber1), stdin);
+        printf("Update mobile phone number: ");
+        fgets(updateContactStruct.PhoneNumber2, sizeof(updateContactStruct.PhoneNumber2), stdin);
+        printf("Update email: ");
+        fgets(updateContactStruct.Email, sizeof(updateContactStruct.Email), stdin);
+        printf("Update address: ");
+        fgets(updateContactStruct.Address, sizeof(updateContactStruct.Address), stdin);
+
+        updateContact(&updateContactStruct, name, lastname);
+
+    } else {
+        printf("Contact does not exist\n");
+    }
+
 }

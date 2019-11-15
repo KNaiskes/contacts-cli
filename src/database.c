@@ -37,8 +37,8 @@ void CreateDatabase(const char *dbName)
            "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," \
            "NAME CHAR(20) NOT NULL,"                        \
            "LASTNAME CHAR(20) NOT NULL,"                    \
-           "PHONENUMER1 CHAR(20),"                          \
-           "PHONENUMER2 CHAR(20),"                          \
+           "PHONENUMBER1 CHAR(20),"                          \
+           "PHONENUMBER2 CHAR(20),"                          \
            "EMAIL CHAR(30),"                                \
            "ADDRESS CHAR(30)"                               \
            ");"                                             \
@@ -56,7 +56,7 @@ void InsertContact(const struct Contact* contact)
 {
     char *sql = sqlite3_mprintf(
             "INSERT INTO contacts"                                       \
-            "(NAME, LASTNAME, PHONENUMER1, PHONENUMER2, EMAIL, ADDRESS)" \
+            "(NAME, LASTNAME, PHONENUMBER1, PHONENUMBER2, EMAIL, ADDRESS)" \
             "VALUES('%q','%q','%q','%q','%q','%q');",                    \
             contact->Name, contact->LastName, contact->PhoneNumber1,
             contact->PhoneNumber2, contact->Email, contact->Address
@@ -97,13 +97,12 @@ void DeleteContact(const struct Contact* contact)
     sqlite3_close(db);
 }
 
-int contactExists(const struct Contact* contact)
+int contactExists(char *name, char *lastName)
 {
     int exists = 0;
     char *sql = sqlite3_mprintf(
             "SELECT id FROM contacts WHERE name = ('%q') AND lastname = ('%q');",
-            contact->Name, contact->LastName);
-
+            name, lastName);
 
     sqlite3_stmt *res;
     rc = sqlite3_open(dbName, &db);
@@ -140,6 +139,36 @@ void listAllContacts()
     }
 
     rc = sqlite3_exec(db, sql, callback, 0, &err_msg);
+
+    sqlite3_close(db);
+}
+
+void updateContact(struct Contact* contact, char *name, char *lastname)
+{
+    char *sql = sqlite3_mprintf(
+            "UPDATE contacts SET                        " \
+            "NAME = ('%q'),                             " \
+            "LASTNAME = ('%q'),                         " \
+            "PHONENUMBER1 = ('%q'),                     " \
+            "PHONENUMBER2 = ('%q'),                     " \
+            "EMAIL = ('%q'),                            " \
+            "ADDRESS = ('%q')                           " \
+            "WHERE name = ('%q') AND lastname = ('%q')  " \
+            ";                                          " \
+            ,
+            contact->Name, contact->LastName, contact->PhoneNumber1,
+            contact->PhoneNumber2, contact->Email, contact->Address,
+            name, lastname
+            );
+
+    rc = sqlite3_open(dbName, &db);
+
+    if(rc) {
+        fprintf(stderr, "Error while trying to update contact %s\n",
+                sqlite3_errmsg(db));
+    }
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
     sqlite3_close(db);
 }

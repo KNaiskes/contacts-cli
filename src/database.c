@@ -153,7 +153,8 @@ void updateContact(struct Contact* contact, char *name, char *lastname)
             "PHONENUMBER2 = ('%q'),                     " \
             "EMAIL = ('%q'),                            " \
             "ADDRESS = ('%q')                           " \
-            "WHERE NAME = ('%q') AND LASTNAME = ('%q')  " \
+            "WHERE name = ('%q') AND lastname = ('%q')  " \
+            ";                                          " \
             ,
             contact->Name, contact->LastName, contact->PhoneNumber1,
             contact->PhoneNumber2, contact->Email, contact->Address,
@@ -166,6 +167,8 @@ void updateContact(struct Contact* contact, char *name, char *lastname)
         fprintf(stderr, "Error while trying to update contact %s\n",
                 sqlite3_errmsg(db));
     }
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
     sqlite3_close(db);
 }

@@ -55,8 +55,9 @@ void editContact()
 {
     struct Contact updateContactStruct;
 
-    char *name;
-    char *lastname;
+    char name[20];
+    char lastname[20];
+    // TODO: malloc memory in runtime rather than using a fixed value
 
     printf("\n**** Update contact  ****\n");
     printf("---------------------------\n");

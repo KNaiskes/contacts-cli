@@ -86,10 +86,14 @@ void editContact()
         fgets(updateContactStruct.Name, sizeof(updateContactStruct.Name), stdin);
         printf("Update lastname: ");
         fgets(updateContactStruct.LastName, sizeof(updateContactStruct.LastName), stdin);
-        printf("Update phone number: ");
-        fgets(updateContactStruct.PhoneNumber1, sizeof(updateContactStruct.PhoneNumber1), stdin);
-        printf("Update mobile phone number: ");
-        fgets(updateContactStruct.PhoneNumber2, sizeof(updateContactStruct.PhoneNumber2), stdin);
+	do {
+	     printf("Update phone number (Must be at least 4 digits and 12 digits at most: ");
+	     fgets(updateContactStruct.PhoneNumber1, sizeof(updateContactStruct.PhoneNumber1), stdin);
+	} while(!phoneLength(updateContactStruct.PhoneNumber1));
+	do {
+	     printf("Update mobile phone number (Must be at least 4 digits and 12 digits at most: ");
+	     fgets(updateContactStruct.PhoneNumber2, sizeof(updateContactStruct.PhoneNumber2), stdin);
+	} while(!phoneLength(updateContactStruct.PhoneNumber2));
         printf("Update email: ");
         fgets(updateContactStruct.Email, sizeof(updateContactStruct.Email), stdin);
         printf("Update address: ");

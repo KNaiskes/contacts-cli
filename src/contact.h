@@ -13,5 +13,6 @@ struct Contact {
 void addNewContact();
 void removeContact();
 void editContact();
+int phoneLength(char *phoneNumber);
 
 #endif // CONTACT_H_

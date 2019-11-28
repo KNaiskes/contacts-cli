@@ -15,5 +15,6 @@ void removeContact();
 void editContact();
 int phoneLength(char *phoneNumber);
 int phoneOnlyDigits(const char *phoneNumber);
+int notEmpty(const char *inp);
 
 #endif // CONTACT_H_

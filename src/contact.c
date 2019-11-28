@@ -30,16 +30,29 @@ int phoneOnlyDigits(const char *phoneNumber)
     return 1;
 }
 
+int notEmpty(const char *inp)
+{
+    size_t len = strlen(inp);
+
+    if(len == 1) return 0;
+
+    return 1;
+}
+
 void addNewContact()
 {
     struct Contact newConctact;
 
     printf("\n**** Add a new contact ****\n");
     printf("---------------------------\n");
-    printf("Name: ");
-    fgets(newConctact.Name, sizeof(newConctact.Name), stdin);
-    printf("Lastname: ");
-    fgets(newConctact.LastName, sizeof(newConctact.LastName), stdin);
+    do {
+        printf("Name: ");
+        fgets(newConctact.Name, sizeof(newConctact.Name), stdin);
+    } while(!notEmpty(newConctact.Name));
+    do {
+        printf("Lastname: ");
+        fgets(newConctact.LastName, sizeof(newConctact.LastName), stdin);
+    } while(!notEmpty(newConctact.LastName));
 
     if(contactExists(newConctact.Name, newConctact.LastName)) {
         printf("Contact already exists\n");
@@ -96,10 +109,14 @@ void editContact()
 
     printf("\n**** Update contact  ****\n");
     printf("---------------------------\n");
-    printf("Name: ");
-    fgets(name, sizeof(name), stdin);
-    printf("Lastname: ");
-    fgets(lastname, sizeof(lastname), stdin);
+    do {
+        printf("Name: ");
+        fgets(name, sizeof(name), stdin);
+    } while(!notEmpty(name));
+    do {
+        printf("Lastname: ");
+        fgets(lastname, sizeof(lastname), stdin);
+    } while(!notEmpty(lastname));
 
     if(contactExists(name, lastname)) {
         printf("Update name: ");

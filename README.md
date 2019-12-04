@@ -24,3 +24,4 @@ $ cd contacts-cli/src/
 $ make
 $ ./contacts-cli
 ```
+![project](https://user-images.githubusercontent.com/6069054/70173772-408fbf00-16dc-11ea-8425-8294eb90f7a9.gif)

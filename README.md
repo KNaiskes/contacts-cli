@@ -11,6 +11,11 @@ exists)
 exists)
 - List all your contacts
 
+### Requirements
+A C compiler (like [GCC](https://gcc.gnu.org/))
+[SQLite](https://sqlite.org/index.html/) (It is already installed in most
+GNU/Linux distributions)
+
 ### Build and run
 
 ```
